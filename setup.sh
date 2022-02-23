@@ -6,20 +6,17 @@ if ! sudo docker --version > /dev/null; then
     curl https://get.docker.com | sudo bash
 fi
 
-MYSQL_DATABASE="bookshelve"
-MYSQL_USER="paultest"
-MYSQL_PASSWORD="paultest"
-MYSQL_ROOT_PASSWORD="paultest"
+
 
 create_container() {
     sudo docker run -d \
         --name mysql \
         -p 3306:3306 \
         --health-cmd='mysqladmin ping --silent' \
-        -e MYSQL_DATABASE="${MYSQL_DATABASE}" \
-        -e MYSQL_ROOT_PASSWORD="${MYSQL_ROOT_PASSWORD}" \
-        -e MYSQL_USER="${MYSQL_USER}" \
-        -e MYSQL_PASSWORD="${MYSQL_PASSWORD}" \
+        -e MYSQL_DATABASE="bookshelve" \
+        -e MYSQL_ROOT_PASSWORD="paultest" \
+        -e MYSQL_USER="paultest" \
+        -e MYSQL_PASSWORD="paultest" \
         mysql:5.7
         while [[ "$(sudo docker inspect --format "{{ .State.Health.Status }}" mysql)" != "healthy" ]]; do 
             sleep 1;
