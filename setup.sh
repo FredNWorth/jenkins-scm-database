@@ -7,6 +7,9 @@ if ! sudo docker --version > /dev/null; then
 fi
 
 MYSQL_DATABASE="bookshelve"
+MYSQL_ROOT_PASSWORD="paultest"
+MYSQL_USER = "paultest"
+MYSQL_PASSWORD = "paultest"
 
 create_container() {
     sudo docker run -d \
